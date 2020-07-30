@@ -1,25 +1,20 @@
 
-  // Abilities
-  function getEggs() {
-    fetch("https://pokeapi.co/api/v2/egg-group/?offset=" )
-      .then(function (response) {
-      if (response.status !== 200) {
-        console.log(
-          "Looks like there was a problem. Status Code: " + response.status
-        );
-        return;
-      }
-      response.json().then(function (data) {
-        console.log(data);
-        
+  // Eggs
+  const url = `https://pokeapi.co/api/v2/egg-group/?offset=`;
+  async function getData(){
+    const response = await fetch(url);
+    const data = await response.json();
+
         for (let i = 0; i < 15; i++) {
-          console.log(data.results[i].name);
-          let para = document.createElement("P"); // Create a <p> element
-          para.className = "alert alert-danger col-md-8";
-          para.innerText = `Ability name: ${data.results[i].name}`; // Insert text
-          let myDiv = document.getElementById("getEggs");
-          myDiv.appendChild(para);
-        }
-      });
-    });
+          console.log("Name: " + data.results[i].name);
+          let para = document.createElement("P")
+          para.innerText = `Egg Name: ${data.results[i].name}`;
+          let newDiv = document.getElementById("getEggs");
+          newDiv.appendChild(para);
+      }
+
   }
+
+  // .then(response=>{console.log("Getting data ... ");})
+  // .catch(error=>{console.error(error);})
+  
